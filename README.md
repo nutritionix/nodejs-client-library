@@ -2,7 +2,7 @@ Official Nutritionix NodeJS Client
 ==================================
 
 #### NOTE This is still in beta and the API may change until version 1.0
-
+#### NOTE `v1` of the API is currently not yet implemented
 
 ### Installation
 

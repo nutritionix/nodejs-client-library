@@ -1,0 +1,35 @@
+{
+  "name": "nutritionix",
+  "version": "0.0.1",
+  "description": "Official Nutritionix NodeJS Client Library",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nutritionix/nodejs-client-library.git"
+  },
+  "keywords": [
+    "nodejs",
+    "nutritionix",
+    "nutrition",
+    "api",
+    "cloud"
+  ],
+  "author": "api@nutritionix.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nutritionix/nodejs-client-library/issues"
+  },
+  "homepage": "https://github.com/nutritionix/nodejs-client-library",
+  "dependencies": {
+    "colors": "~0.6.2",
+    "async": "~0.2.10",
+    "underscore": "~1.6.0",
+    "request": "~2.33.0"
+  }
+}

@@ -7,13 +7,13 @@ Official Nutritionix NodeJS Client
 ### Installation
 
 ```shell
-npm install node-nutritionix --save
+npm install nutritionix --save
 ```
 
 
 ```js
 // Require inside your project
-var nutritionix = require('node-nutritionix')({
+var nutritionix = require('nutritionix')({
     appId: 'YOUR_APP_ID',
     appKey: 'YOUR_APP_KEY'
 }, false);
@@ -86,7 +86,7 @@ nutritionix.v1_1.search.advanced({
 ### Brand Search
 
 ```js
-// GET https://api.nutritionix.com/v1_1/brand/search?query=just+salad&auto=true&type=1&min_score=1&appId=c7a8b9cd&appKey=8e54cb1c548d4470701cfdddc8883a57
+// GET https://api.nutritionix.com/v1_1/brand/search?query=just+salad&auto=true&type=1&min_score=1
 nutritionix.v1_1.search.brand({
     query:'just salad',
     auto:true,
@@ -96,3 +96,8 @@ nutritionix.v1_1.search.brand({
     // ...
 });
 ```
+
+#### Special thanks
+Thank you to [picsoung][1] for allowing us to take over the npm package and inspiring us to create an official nodejs client.
+
+[1]:https://www.npmjs.org/~picsoung

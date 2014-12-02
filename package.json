@@ -29,9 +29,10 @@
   },
   "homepage": "https://github.com/nutritionix/nodejs-client-library",
   "dependencies": {
-    "colors": "~0.6.2",
     "async": "~0.2.10",
-    "underscore": "~1.6.0",
+    "bluebird": "^2.3.11",
+    "colors": "~0.6.2",
+    "lodash": "^2.4.1",
     "request": "~2.33.0"
   },
   "readme": "Official Nutritionix NodeJS Client\n==================================\n\n#### NOTE This is still in beta and the API may change until version 1.0\n#### NOTE `v1` of the API is currently not yet implemented\n\n### Installation\n\n```shell\nnpm install nutritionix --save\n```\n\n\n```js\n// Require inside your project\nvar nutritionix = require('nutritionix')({\n    appId: 'YOUR_APP_ID',\n    appKey: 'YOUR_APP_KEY'\n}, false);\n\n// Second argument false can be changed to true\n// This will tell the library to enter debugging mode\n// and log additional data to the console\n```\n\n### UPC Scan\n\n```js\n// GET https://api.nutritionix.com/v1_1/item?upc=52200004265\nnutritionix.v1_1.item({\n    upc: 52200004265\n}, function (err, item) {\n    // ...\n});\n```\n\n### Get Item by id\n\n```js\n// GET https://api.nutritionix.com/v1_1/item?upc=52200004265\nnutritionix.v1_1.item({\n    id: '5284ebc52504590000003f4a'\n}, function (err, item) {\n    // ...\n});\n```\n\n### Get Brand By ID\n\n```js\n// GET https://api.nutritionix.com/v1_1/brand/51db37c3176fe9790a8991f6\nnutritionix.v1_1.brand({\n    id: '51db37c3176fe9790a8991f6'\n}, function (err, brand){\n    // ...\n});\n```\n\n\n### Standard Search\n\n```js\n// GET https://api.nutritionix.com/v1_1/search/mcdonalds?results=0:1\nnutritionix.v1_1.search.standard({\n    phrase: 'mcdonalds',\n    results: '0:1'\n}, function (err, results){\n    // ...\n});\n```\n\n### NXQL Advanced Search\n\n```js\n// POST https://api.nutritionix.com/v1_1/search -d DATA\nnutritionix.v1_1.search.advanced({\n    fields: ['item_name','brand_name'],\n    query: 'mcdonalds',\n    offset:0,\n    limit:1\n}, function (err, results){\n    // ...\n});\n```\n\n### Brand Search\n\n```js\n// GET https://api.nutritionix.com/v1_1/brand/search?query=just+salad&auto=true&type=1&min_score=1\nnutritionix.v1_1.search.brand({\n    query:'just salad',\n    auto:true,\n    type:1,\n    min_score:1\n}, function (err, results){\n    // ...\n});\n```\n\n#### Special thanks\nThank you to [picsoung][1] for allowing us to take over the npm package and inspiring us to create an official nodejs client.\n\n[1]:https://www.npmjs.org/~picsoung",

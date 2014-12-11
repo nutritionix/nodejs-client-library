@@ -37,7 +37,7 @@ nutritionix.item({ id: 'zgcjnYV' })
 
 ```js
 // this will locate a brand by its id
-nutritionix.v1_1.brand({ id: 'bV'})
+nutritionix.brand({ id: 'bV'})
     .then(successHandler, errorHandler)
     .catch(uncaughtExceptionHandler);
 ```

@@ -1,7 +1,8 @@
 Official Nutritionix NodeJS Client
 ==================================
 
-#### NOTE This is still in beta and the API may change until version 1.0
+#### NOTE This is still in beta and the API may change until version 1.0 of this library.
+
 #### NOTE `v1` of the API is currently not yet implemented
 
 ### Installation
@@ -13,91 +14,89 @@ npm install nutritionix --save
 
 ```js
 // Require inside your project
-var nutritionix = require('nutritionix')({
+var NutritionixClient = require('nutritionix');
+var nutritionix = new NutritionixClient({
     appId: 'YOUR_APP_ID',
     appKey: 'YOUR_APP_KEY'
-}, false);
-
-// Second argument false can be changed to true
-// This will tell the library to enter debugging mode
-// and log additional data to the console
-```
-
-### UPC Scan
-
-```js
-// GET https://api.nutritionix.com/v1_1/item?upc=52200004265
-nutritionix.v1_1.item({
-    upc: 52200004265
-}, function (err, item) {
-    // ...
+    // debug: true, // defaults to false
 });
 ```
 
-### Get Item by id
+### Execute an autocomplete query
 
 ```js
-// GET https://api.nutritionix.com/v1_1/item?upc=52200004265
-nutritionix.v1_1.item({
-    id: '5284ebc52504590000003f4a'
-}, function (err, item) {
-    // ...
-});
+// This will perform a fuzzy autocomplete query and return suggestions
+nutritionix.autocomplete({ q: 'chedar che' })
+    .then(successHandler, errorHandler)
+    .catch(uncaughtExceptionHandler);
+;
 ```
 
-### Get Brand By ID
+
+### Execute a natural search
 
 ```js
-// GET https://api.nutritionix.com/v1_1/brand/51db37c3176fe9790a8991f6
-nutritionix.v1_1.brand({
-    id: '51db37c3176fe9790a8991f6'
-}, function (err, brand){
-    // ...
-});
+var ingredients = [
+  '1 tbsp sugar',
+  '1 red pepper'
+];
+
+// ensure you are passing a string with queries delimited by new lines.
+nutritionix.natural(ingredients.join('\n'))
+    .then(successHandler, errorHandler)
+    .catch(uncaughtExceptionHandler);
+;
+```
+
+### Get Item By `id` or search `resource_id`
+
+```js
+// this will locate an item by its (id, resource_id, or upc)
+nutritionix.item({ id: 'zgcjnYV' })
+    .then(successHandler, errorHandler)
+    .catch(uncaughtExceptionHandler);
+;
+```
+
+
+### Get Brand By `id`
+
+```js
+// this will locate a brand by its id
+nutritionix.brand({ id: 'bV'})
+    .then(successHandler, errorHandler)
+    .catch(uncaughtExceptionHandler);
 ```
 
 
 ### Standard Search
 
 ```js
-// GET https://api.nutritionix.com/v1_1/search/mcdonalds?results=0:1
-nutritionix.v1_1.search.standard({
-    phrase: 'mcdonalds',
-    results: '0:1'
-}, function (err, results){
-    // ...
-});
-```
-
-### NXQL Advanced Search
-
-```js
-// POST https://api.nutritionix.com/v1_1/search -d DATA
-nutritionix.v1_1.search.advanced({
-    fields: ['item_name','brand_name'],
-    query: 'mcdonalds',
-    offset:0,
-    limit:1
-}, function (err, results){
-    // ...
-});
+// This will perform a search. The object passed into this function
+// can contain all the perameters the API accepts in the `POST /v2/search` endpoint
+nutritionix.search.standard({
+  q:'salad',
+  // use these for paging
+  limit: 10,
+  offset: 0,
+  // controls the basic nutrient returned in search
+  search_nutrient: 'calories'
+}).then(successHandler, errorHandler)
+  .catch(uncaughtExceptionHandler);
 ```
 
 ### Brand Search
 
 ```js
-// GET https://api.nutritionix.com/v1_1/brand/search?query=just+salad&auto=true&type=1&min_score=1
-nutritionix.v1_1.search.brand({
-    query:'just salad',
-    auto:true,
-    type:1,
-    min_score:1
-}, function (err, results){
-    // ...
-});
+// This will perform a search. The object passed into this function
+// can contain all the perameters the API accepts in the `GET /v2/search/brands` endpoint
+nutritionix.brand_search({
+    q: 'just salad',
+    limit: 10,
+    offset: 0,
+    type: 1 // (1:restaurant, 2:cpg, 3:usda/nutritionix) defaults to undefined
+}).then(successHandler, errorHandler)
+  .catch(uncaughtExceptionHandler);
 ```
 
-#### Special thanks
-Thank you to [picsoung][1] for allowing us to take over the npm package and inspiring us to create an official nodejs client.
-
-[1]:https://www.npmjs.org/~picsoung
+Take a look `tests/index.js` for an end to end usecase for these libraries.

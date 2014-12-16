@@ -29,7 +29,6 @@ var nutritionix = new NutritionixClient({
 nutritionix.autocomplete({ q: 'chedar che' })
     .then(successHandler, errorHandler)
     .catch(uncaughtExceptionHandler);
-;
 ```
 
 
@@ -45,7 +44,6 @@ var ingredients = [
 nutritionix.natural(ingredients.join('\n'))
     .then(successHandler, errorHandler)
     .catch(uncaughtExceptionHandler);
-;
 ```
 
 ### Get Item By `id` or search `resource_id`

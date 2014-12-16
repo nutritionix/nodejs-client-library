@@ -22,10 +22,36 @@ var nutritionix = new NutritionixClient({
 });
 ```
 
+### Execute an autocomplete query
+
+```js
+// This will perform a fuzzy autocomplete query and return suggestions
+nutritionix.autocomplete({ q: 'chedar che' })
+    .then(successHandler, errorHandler)
+    .catch(uncaughtExceptionHandler);
+;
+```
+
+
+### Execute a natural search
+
+```js
+var ingredients = [
+  '1 tbsp sugar',
+  '1 red pepper'
+];
+
+// ensure you are passing a string with queries delimited by new lines.
+nutritionix.natural(ingredients.join('\n'))
+    .then(successHandler, errorHandler)
+    .catch(uncaughtExceptionHandler);
+;
+```
+
 ### Get Item By `id` or search `resource_id`
 
 ```js
-// this will locate an item by its id or by a search `resource_id`
+// this will locate an item by its (id, resource_id, or upc)
 nutritionix.item({ id: 'zgcjnYV' })
     .then(successHandler, errorHandler)
     .catch(uncaughtExceptionHandler);

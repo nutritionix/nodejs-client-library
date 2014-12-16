@@ -35,11 +35,12 @@ function Nutritionix(clientOpts) {
     log('Debugging is enabled');
 
     return {
-        search: new apiMap.ApiRequest('v2.search', 'json'),
-        autocomplete: new apiMap.ApiRequest('v2.autocomplete', 'qs'),
+        search:         new apiMap.ApiRequest('v2.search', 'json'),
+        autocomplete:   new apiMap.ApiRequest('v2.autocomplete', 'qs'),
         'brand_search': new apiMap.ApiRequest('v2.brand_search', 'qs'),
-        item: new apiMap.ApiRequest('v2.item', 'qs'),
-        brand: new apiMap.ApiRequest('v2.brand', 'qs')
+        item:           new apiMap.ApiRequest('v2.item', 'qs'),
+        brand:          new apiMap.ApiRequest('v2.brand', 'qs'),
+        natural:        new apiMap.ApiRequest('v2.natural', 'body')
     };
 }
 

@@ -1,9 +1,7 @@
-Official Nutritionix NodeJS Client
+Nutritionix API v2.0 Beta NodeJS Client Library
 ==================================
 
-#### NOTE This is still in beta and the API may change until version 1.0 of this library.
-
-#### NOTE `v1` of the API is currently not yet implemented
+#### NOTE This library is still in beta and subject to change.
 
 ### Installation
 

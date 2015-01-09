@@ -34,7 +34,24 @@ function Nutritionix(clientOpts) {
     // you will only see this if its enabled
     log('Debugging is enabled');
 
-    return {
+    var nutritionix = {
+        $extend: function (endpoints, mapDefinitionFunction) {
+            apiMap.map.$extend(mapDefinitionFunction);
+            _.forEach(endpoints, function (endpoint) {
+                var endpointRoute = (endpoint.name || endpoint.path).split('.');
+                var current = nutritionix;
+                var routeKey = endpointRoute.pop();
+                _.forEach(endpointRoute, function (routeKey) {
+
+                    if (!current[routeKey]) {
+                        current[routeKey] = {};
+                    }
+                    current = current[routeKey];
+                })
+
+                current[routeKey] = new apiMap.ApiRequest(endpoint.path, endpoint.payloadKey, endpoint.expectedStatus);
+            });
+        },
         search:         new apiMap.ApiRequest('v2.search', 'json'),
         autocomplete:   new apiMap.ApiRequest('v2.autocomplete', 'qs'),
         'brand_search': new apiMap.ApiRequest('v2.brand_search', 'qs'),
@@ -42,6 +59,8 @@ function Nutritionix(clientOpts) {
         brand:          new apiMap.ApiRequest('v2.brand', 'qs'),
         natural:        new apiMap.ApiRequest('v2.natural', 'body')
     };
+
+    return nutritionix;
 }
 
 // Exposing

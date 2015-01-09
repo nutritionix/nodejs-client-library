@@ -1,6 +1,6 @@
 {
   "name": "nutritionix",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Official Nutritionix NodeJS Client Library",
   "main": "index.js",
   "directories": {

@@ -47,7 +47,7 @@ function Nutritionix(clientOpts) {
                         current[routeKey] = {};
                     }
                     current = current[routeKey];
-                })
+                });
 
                 current[routeKey] = new apiMap.ApiRequest(endpoint.path, endpoint.payloadKey, endpoint.expectedStatus);
             });
